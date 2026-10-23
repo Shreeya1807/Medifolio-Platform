@@ -4,6 +4,8 @@
 
 A React/Flask portfolio platform for versioned medical record text, browser image OCR, patient-controlled sharing, access auditing, and private WebRTC consultations. Use synthetic records only. No diagnostic, treatment, regulatory compliance, or clinical-readiness claim is made.
 
+## Interface
+
 ![Versioned synthetic records in the running patient workspace](docs/screenshots/records.png)
 
 <details>
@@ -18,6 +20,19 @@ A React/Flask portfolio platform for versioned medical record text, browser imag
 These are actual local application screenshots with synthetic records and simulated camera devices. They demonstrate the local workflow, not clinical use or connectivity across every network.
 
 </details>
+
+## Architecture
+
+```mermaid
+flowchart LR
+    UI[React patient / doctor workspace] --> API[Flask API]
+    API --> Access[Role and sharing checks]
+    Access --> Records[(Encrypted record bodies + immutable versions)]
+    Access --> Audit[(Append-only audit log)]
+    UI --> OCR[Browser image OCR]
+    UI --> Signal[Authorized consultation signaling]
+    Signal -. Negotiates .-> Media[Browser-to-browser WebRTC media]
+```
 
 ## Start locally
 
