@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    ports: ['127.0.0.1:5001:5001']
+    volumes: [record-data:/app/data]
+    environment:
+      DATA_DIR: /app/data
+    restart: unless-stopped
+volumes:
+  record-data:
